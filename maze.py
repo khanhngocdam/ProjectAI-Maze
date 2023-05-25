@@ -21,7 +21,7 @@ def create_maze(matrix):
                 pygame.draw.rect(screen, BLACK, (j * cell_size, i * cell_size, cell_size, cell_size))
             elif matrix[i][j] == 0:
                 pygame.draw.rect(screen, WHITE, (j * cell_size, i * cell_size, cell_size, cell_size))
-            else :
+            else:
                 pygame.draw.rect(screen, RED, (j * cell_size, i * cell_size, cell_size, cell_size))
 
 

@@ -4,7 +4,7 @@ import heapq
 def sol_maze(maze, start, end):
     open_list = []
     g_score = {start: 0}
-    heapq.heappush(open_list, (0, g_score[start], start))
+    heapq.heappush(open_list, (heuristic(start, end), g_score[start], start))
     came_from = {}
     while open_list:
         current = heapq.heappop(open_list)[2]
@@ -44,7 +44,7 @@ def get_neighbors(maze, cell):
         neighbors.append((x + 1, y))
 
     # Kiểm tra ô hàng xóm bên trái
-    if y > 0 and maze[x][y - 1] != 1:
+    if y > 0 and maze[x][y - 1] == 1:
         neighbors.append((x, y - 1))
 
     # Kiểm tra ô hàng xóm bên phải
