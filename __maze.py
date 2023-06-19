@@ -1,7 +1,7 @@
 import pygame
 
 # Khởi tạo màn hình pygame
-width, height = 640, 640
+width, height = 960, 960
 screen = pygame.display.set_mode((width, height))
 # Đặt tên cho cửa sổ
 pygame.display.set_caption("Maze")
@@ -9,6 +9,7 @@ pygame.display.set_caption("Maze")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
 # Kích thước 1 ô
 cell_size = 20
 
@@ -21,8 +22,10 @@ def create_maze(matrix):
                 pygame.draw.rect(screen, BLACK, (j * cell_size, i * cell_size, cell_size, cell_size))
             elif matrix[i][j] == 0:
                 pygame.draw.rect(screen, WHITE, (j * cell_size, i * cell_size, cell_size, cell_size))
-            else:
+            elif matrix[i][j] == 2:
                 pygame.draw.rect(screen, RED, (j * cell_size, i * cell_size, cell_size, cell_size))
+            else:
+                pygame.draw.rect(screen, GREEN, (j * cell_size, i * cell_size, cell_size, cell_size))
 
 
 # Hàm chính
@@ -44,14 +47,24 @@ def draw_maze(matrix, ans):
 
         # Vẽ mê cung
         create_maze(matrix)
-        clock.tick(3)  # Giới hạn tốc độ 1 khung hình mỗi giây
+        # clock.tick(100)  # Giới hạn tốc độ 1 khung hình mỗi giây
         # Vẽ đường
         if draw_path:
             if len(ans) > 0:
                 x, y = ans.pop(0)
-                matrix[x][y] = 2
+                matrix[x][y] = 3
         # Cập nhật màn hình
         pygame.display.flip()
 
     # Kết thúc Pygame
     pygame.quit()
+
+
+def draw_path(matrix, ans):
+    screen.fill(BLACK)
+    create_maze(matrix)
+    if len(ans) > 0:
+        x, y = ans.pop(0)
+        matrix[x][y] = 2
+
+    pygame.display.flip()
