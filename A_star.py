@@ -1,5 +1,6 @@
 import heapq
-
+import __maze
+import time
 
 def sol_maze(maze, start, end):
     open_list = []
@@ -8,6 +9,9 @@ def sol_maze(maze, start, end):
     came_from = {}
     while open_list:
         current = heapq.heappop(open_list)[2]
+
+        __maze.draw_path(maze, reconstruct_path(maze, current))
+        # time.sleep(0.01)
 
         if current == end:
             return reconstruct_path(came_from, end)
